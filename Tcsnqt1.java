@@ -1,29 +1,14 @@
 import  java.util.*;
 public class Tcsnqt1{
 	public static void main(String args[]){
-		int k=2,q=0,l=0;
+		int k=3,q=0,l=0;
 		List<Integer> b=new ArrayList<Integer>();
-		String s="10111101100";
+		String s="101011110";
 		char[] a=s.toCharArray();
-		for(char c:a){
-			if(c=='1') {
-				q++;
+		for(int i=0;i<a.length;i++){
+			if(a[i]=='1') {
+				b.add(count(i,a,k));
 				
-			}
-			else{
-			    l++;
-				if(l>k){
-					b.add(q+k);
-					l=0;
-					q=0;
-					
-				}
-				else if(l==k+1){
-					q=q+l;
-					b.add(q);
-					l=0;
-				    q=0;
-				}
 			}
 		}
 		for(Integer i:b){
@@ -31,5 +16,31 @@ public class Tcsnqt1{
 		}
 		System.out.println(q);
 		
+	}
+	private static int count(int i,char[] a,int k){
+		int l=0,q=0;
+		for(int j=i;j<a.length;j++){
+			if(a[j]=='1') {
+				q++;
+				if(l==k){
+					q=q+l;
+					return q;
+					
+				}
+				
+			}
+			else{
+			    	l++;
+				if(l>k){
+					return (q+l-1);
+					
+				}
+			}
+		}
+		while(l<k && a[i-1]=='0'){
+			l++;
+			i--;
+		}
+		return q+l;
 	}
 }
